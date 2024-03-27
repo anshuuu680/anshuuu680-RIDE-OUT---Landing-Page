@@ -85,6 +85,28 @@ body::-webkit-scrollbar {
     padding-left: 10px;
     width: 50%;
     height: 50%;
+
+}
+
+
+.page-1-content:nth-child(even) {
+    padding-bottom: 70px;
+    font-size: 2.8vw;
+
+    display: flex;
+    align-items: end;
+    border: 1px dotted black;
+
+}
+
+.para-parent-inside {
+    padding: 7px;
+    overflow: hidden;
+}
+
+
+.para-parent-inside p span {
+    display: inline-block;
 }
 
 .page-1-content h1 {

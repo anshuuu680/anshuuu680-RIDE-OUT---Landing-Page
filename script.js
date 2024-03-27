@@ -2,6 +2,7 @@ let inside_scroller = document.querySelector(".inside-scroller");
 let image = document.querySelector(".page-2-image img");
 let nav_layer = document.querySelector(".nav-layer");
 let navbar = document.querySelector("#navbar");
+let para = document.querySelector(".para-parent-inside p");
 
 const page_2_array = [
   {
@@ -27,13 +28,53 @@ const page_2_array = [
   },
 ];
 
-const page_2 = () => {
-  let index = 1;
+const page_1_textChange = [
+  {
+    text: "Amsterdam",
+    logo: "",
+  },
+  {
+    text: "The Ultimate Bike Store",
+    logo: "",
+  },
+  {
+    text: `Open Today Until 6pm`,
+    logo: "",
+  },
+];
 
-  setTimeout(() => {
-    image.src = `${page_2_array[index++].img}`;
-  }, 3000);
-};
+const page_1 = (() => {
+
+  
+  let currentIndex = 0;
+
+  function showNextWave() {
+    let clutter = "";
+
+    page_1_textChange[currentIndex].text.split("").forEach((letter) => {
+      if (letter === " ") {
+        clutter += '<span class="space">&nbsp;</span>';
+      } else {
+        clutter += `<span>${letter}</span>`;
+      }
+    });
+
+    para.innerHTML = clutter;
+
+    gsap.from(".para-parent-inside p span", {
+      y: -50,
+      opacity: 0,
+      stagger: 0.1,
+      ease: "Expo.out",
+    });
+
+    currentIndex = (currentIndex + 1) % page_1_textChange.length;
+  }
+
+  setInterval(showNextWave, 3000);
+
+  showNextWave();
+})();
 
 const nav = () => {
   window.addEventListener("scroll", function () {
@@ -47,6 +88,14 @@ const nav = () => {
       navbar.style.color = "initial";
     }
   });
+};
+
+const page_2 = () => {
+  let index = 0;
+
+  setTimeout(() => {
+    image.src = `${page_2_array[index++].img}`;
+  }, 3000);
 };
 
 nav();
