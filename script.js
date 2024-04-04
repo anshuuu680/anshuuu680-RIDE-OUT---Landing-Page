@@ -1,8 +1,11 @@
-let inside_scroller = document.querySelector(".inside-scroller");
-let image = document.querySelector(".page-2-image img");
 let nav_layer = document.querySelector(".nav-layer");
 let navbar = document.querySelector("#navbar");
 let para = document.querySelector(".para-parent-inside p");
+let inside_scroller = document.querySelector(".inside-scroller");
+let image = document.querySelector(".page-2-image img");
+let p_change = document.querySelector(".p-change");
+let sent = document.querySelector(".parts p");
+let button_change = document.querySelector(".parts button");
 
 const page_2_array = [
   {
@@ -10,21 +13,21 @@ const page_2_array = [
     paragraph:
       " We foster curiosity and deliver moments of brand and product excitement",
     sent: "Check out our complete collection of brands",
-    button: "Our Brands",
+    button: "VISIT OUR WEBSHOPS",
   },
   {
     img: "https://rideout.amsterdam/wp-content/uploads/2023/08/DSCF7419-2.jpg",
     paragraph:
-      " We foster curiosity and deliver moments of brand and product excitement",
-    sent: "Check out our complete collection of brands",
+      " Pedaling through lush landscapes, embracing nature's rhythmic harmony.From dawn to dusk,  continues onward.",
+    sent: "Check our products online",
     button: "Our Brands",
   },
   {
     img: "https://rideout.amsterdam/wp-content/uploads/2023/08/explore.jpg",
     paragraph:
-      " We foster curiosity and deliver moments of brand and product excitement",
-    sent: "Check out our complete collection of brands",
-    button: "Our Brands",
+      " Wheels spinning, hearts racing, chasing endless roads of adventure.",
+    sent: "Check out our policies",
+    button: "DISCOVER ALL ABOUT US",
   },
 ];
 
@@ -44,8 +47,6 @@ const page_1_textChange = [
 ];
 
 const page_1 = (() => {
-
-  
   let currentIndex = 0;
 
   function showNextWave() {
@@ -91,11 +92,28 @@ const nav = () => {
 };
 
 const page_2 = () => {
-  let index = 0;
+  let currentIndex = 0;
 
-  setTimeout(() => {
-    image.src = `${page_2_array[index++].img}`;
-  }, 3000);
+  function changeWidthAndImage() {
+    inside_scroller.style.visibility = "visible"; // Make the element visible before changing width
+    inside_scroller.style.width = "100%";
+
+    setTimeout(() => {
+      inside_scroller.style.width = "0%";
+      inside_scroller.style.visibility = "hidden"; // Hide the element after the width transition completes
+      currentIndex = (currentIndex + 1) % page_2_array.length;
+      image.src = page_2_array[currentIndex].img;
+      p_change.innerText = page_2_array[currentIndex].paragraph;
+      sent.innerText = page_2_array[currentIndex].sent;
+      button_change.innerText = page_2_array[currentIndex].button;
+    }, 3000); // Change width after 3 seconds
+  }
+
+  // Initial call
+  changeWidthAndImage();
+
+  // Repeat every 3 seconds
+  setInterval(changeWidthAndImage, 6000);
 };
 
 nav();
